@@ -1,16 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>MicroMVC PHP Framework</title>
-
 <link rel="stylesheet" href="<?php print THEME_URL; ?>style.css" type="text/css" media="screen" />
 <?php if(!empty($header_files)) { print $header_files; } ?>
-
-</head>
-<body>
-
 <div id="container">
 	<div id="menu">
 		<ul>
@@ -20,11 +9,11 @@
 
 			//Create a list of the menu links
 			$links = array(
-				'Welcome' => 'welcome/index',
-				'Hooks' => 'hooks',
-				'URI' => 'hooks/say',
-				'Twitter' => 'twitter',
-				'SQLite' => 'posts',
+				'My Ideas' => 'me',
+				'Friends Ideas' => 'friends',
+				'Top Ideas' => 'top',
+				'New Ideas' => 'new',
+				'All' => 'all',
 			);
 
 			//For each link
@@ -49,12 +38,9 @@
 
 	<div id="footer">
 		<div class="wrapper">
-			<p>Page rendered in <?php print round((microtime(true) - START_TIME), 5); ?> seconds
+			<!--p>Page rendered in <?php print round((microtime(true) - START_TIME), 5); ?> seconds
 			taking <?php print round((memory_get_usage() - START_MEMORY_USAGE) / 1024, 2); ?> KB
-			(<?php print (memory_get_usage() - START_MEMORY_USAGE); ?> Bytes).</p>
+			(<?php print (memory_get_usage() - START_MEMORY_USAGE); ?> Bytes).</p-->
 		</div>
 	</div>
 </div>
-
-</body>
-</html>
