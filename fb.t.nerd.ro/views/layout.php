@@ -1,5 +1,9 @@
-<link rel="stylesheet" href="<?php print THEME_URL; ?>style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://fb.t.nerd.ro/fb.t.nerd.ro/views/style.css" type="text/css" media="screen" />
 <?php if(!empty($header_files)) { print $header_files; } ?>
+<?php
+    echo "<p>Hello, <fb:name uid=\"$user_id\" useyou=\"false\" />!</p>";
+    echo "<h2>$message</h2>";
+?>
 <div id="container">
 	<div id="menu">
 		<ul>
@@ -9,11 +13,12 @@
 
 			//Create a list of the menu links
 			$links = array(
-				'My Ideas' => 'me',
-				'Friends Ideas' => 'friends',
-				'Top Ideas' => 'top',
-				'New Ideas' => 'new',
-				'All' => 'all',
+				'Homepage' => 'home/',
+				'My Ideas' => 'me/',
+				'Friends Ideas' => 'friends/',
+				'Top Ideas' => 'top/',
+				'New Ideas' => 'new/',
+				'All' => 'all/',
 			);
 
 			//For each link

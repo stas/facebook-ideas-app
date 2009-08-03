@@ -5,15 +5,6 @@
 $hooks['system_startup'][] = array();
 
 /*
- * Facebook init
- */
-$hooks['facebook_init'][] = array(
-    'class'     => 'facebook',
-    'object'    => 'fb',
-    'path'      => 'modules/facebook/'
-    );
-
-/*
  * Run after the controller is loaded
  */
 $hooks['post_constructor'][] = array();

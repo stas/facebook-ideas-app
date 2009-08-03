@@ -60,10 +60,10 @@ class Facebook {
    *                                 if the user doesn't have one, but
    *                                 there is an auth token present in the url,
    */
-  public function __construct($api_key, $secret, $generate_session_secret=false) {
-    $this->api_key                 = $api_key;
-    $this->secret                  = $secret;
-    $this->generate_session_secret = $generate_session_secret;
+  public function __construct($config) {
+    $this->api_key                 = $config['api_key'];
+    $this->secret                  = $config['secret'];
+    $this->generate_session_secret = $config['generate_session_secret'];
     $this->api_client = new FacebookRestClient($api_key, $secret, null);
     $this->validate_fb_params();
 
