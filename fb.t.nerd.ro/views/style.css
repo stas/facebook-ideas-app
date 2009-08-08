@@ -1,3 +1,8 @@
-#menu ul {list-style: none; margin: 10px 0 10px; padding: 0; border-bottom: 1px solid #999;}
-#menu ul li {display: inline; margin: 5px 5px 5px 0; border: 1px solid #999; border-bottom: 0px; padding: 1px 3px 0;}
+#main { margin: 10px 0;}
+#submenu ul {width: 200px; float: left;}
 #submenu ul li .selected {display: none;}
+#mine_ideas {border-collapse:collapse; margin-bottom:15px; width:100%; }
+#mine_ideas thead {font-weight:bold; text-align:left; -moz-background-clip:border; -moz-background-inline-policy:continuous; -moz-background-origin:padding; background:#3B5998 none repeat scroll 0 0; color:#FFFFFF; padding:3px;}
+#mine_ideas tfoot {font-weight:bold; text-align:left; -moz-background-clip:border; -moz-background-inline-policy:continuous; -moz-background-origin:padding; background:#3B5998 none repeat scroll 0 0; line-height: 10px; margin: 0; padding: 0; color: #fff; padding:3px;}
+#mine_ideas tfoot a {color: #fff;}
+#mine_ideas td {padding: 10px 5px; border-bottom:1px solid #F0F0EE; }

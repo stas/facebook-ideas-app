@@ -64,7 +64,7 @@ class Facebook {
     $this->api_key                 = $config['api_key'];
     $this->secret                  = $config['secret'];
     $this->generate_session_secret = $config['generate_session_secret'];
-    $this->api_client = new FacebookRestClient($api_key, $secret, null);
+    $this->api_client = new FacebookRestClient($this->api_key, $this->secret, null);
     $this->validate_fb_params();
 
     // Set the default user id for methods that allow the caller to

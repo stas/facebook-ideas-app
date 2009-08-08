@@ -12,8 +12,7 @@
  * @version		1.1.0 <7/7/2009>
  ********************************** 80 Columns *********************************
  */
-class posts_model extends base {
-
+class db_model extends base {
 
 	//Check to see if the table exists - install it if not!
 	function check_install() {
@@ -30,64 +29,57 @@ class posts_model extends base {
 
 		//If the table is not found
 		if( ! $result->fetchColumn()) {
-			$this->posts->create_table();
+			$this->create_table();
 		}
 	}
 
 
 	// Create the posts table
 	function create_table() {
-		$sql = 'CREATE TABLE IF NOT EXISTS `posts` (
-			  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-			  `title` varchar(255) NOT NULL,
-			  `author` int(10) unsigned NOT NULL,
-			  `text` text NOT NULL,
-			  PRIMARY KEY (`id`)
-			) ENGINE=MyISAM ;';
+		$sql = 'CREATE TABLE IF NOT EXISTS `ideas` (
+			`id` int(11) NOT NULL auto_increment,
+			`title` varchar(150) collate utf8_bin NOT NULL,
+			`message` varchar(2000) collate utf8_bin NOT NULL,
+			`aid` bigint(20) NOT NULL,
+			`rating` float default 0,
+			PRIMARY KEY  (`id`)
+		      ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;';
 
 		//Create the table
 		$this->db->exec($sql);
 	}
 
-
-	/**
-	 * Add some sample rows to the database
-	 * @return	void
-	 */
-	function insert() {
-
-		//CREATE NEW ROWS IN THE TABLE
-		$data[] = array(
-			'title' => 'My First Post',
-			'text' => 'Today I finished the beta of my new website!',
-			'author' => 'Me'
-		);
-
-		$data[] = array(
-			'title' => 'My Second Post',
-			'text' => 'Now that my site is done I can go relax!',
-			'author' => 'Myself'
-		);
-
-		$data[] = array(
-			'title' => 'My Third Post',
-			'text' => 'I\'ll add to this later',
-			'author' => 'and I'
-		);
-
-		//Add them
-		foreach($data as $row) {
-			$this->db->insert('posts', $row);
-		}
-
+	function insert_idea($idea) {
+		$this->db->insert('ideas', $idea);
 	}
-
 
 	/*
 	 * Get all the posts
 	 */
 	function fetch() {
-		return $this->db->get('posts');
+		return $this->db->get('ideas');
+	}
+	
+	/*
+	 * Get all mine posts
+	 */
+	function fetch_mine_posts($id, $value, $offset) {
+		$this->db->from('ideas');
+		$this->db->where('aid', $id);
+		if($value)
+			$this->db->limit($offset, $value);
+		else
+			$this->db->limit($offset);
+		return $this->db->get();
+	}
+	
+	/*
+	 * Count all mine posts
+	 */
+	function count_mine_posts($id) {
+		$this->db->from('ideas');
+		$this->db->where('aid', $id);
+		return $this->db->count();
 	}
 
 

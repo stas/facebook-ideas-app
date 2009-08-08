@@ -7,7 +7,8 @@
                 //Create a list of the menu links
                 $links = array(
                         'Add new idea' => 'me/new_idea',
-                        'List all' => 'me/'
+                        'List all' => 'me/all',
+                        'Invite your friends' => 'me/invite',
                 );
 
                 //For each link
