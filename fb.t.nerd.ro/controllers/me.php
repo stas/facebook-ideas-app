@@ -27,7 +27,6 @@ class me extends controller {
 	 */
 	function index() {
 
-		//Create Some data
 		$view['class'] = get_class($this);
 		$view['function'] = __FUNCTION__;
 		$this->views['user_id'] = $this->user_id;

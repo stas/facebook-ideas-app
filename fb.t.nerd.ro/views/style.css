@@ -1,8 +1,70 @@
 #main { margin: 10px 0;}
-#submenu ul {width: 200px; float: left;}
-#submenu ul li .selected {display: none;}
-#mine_ideas {border-collapse:collapse; margin-bottom:15px; width:100%; }
-#mine_ideas thead {font-weight:bold; text-align:left; -moz-background-clip:border; -moz-background-inline-policy:continuous; -moz-background-origin:padding; background:#3B5998 none repeat scroll 0 0; color:#FFFFFF; padding:3px;}
-#mine_ideas tfoot {font-weight:bold; text-align:left; -moz-background-clip:border; -moz-background-inline-policy:continuous; -moz-background-origin:padding; background:#3B5998 none repeat scroll 0 0; line-height: 10px; margin: 0; padding: 0; color: #fff; padding:3px;}
-#mine_ideas tfoot a {color: #fff;}
-#mine_ideas td {padding: 10px 5px; border-bottom:1px solid #F0F0EE; }
+#mine_ideas {margin-left:0px;margin-top:15px;width:100%;text-align:center;}
+#mine_ideas th.name_heading {color:#333333;font-size:11px;font-weight:bold;}
+#mine_ideas th {border-color:#C7CFE0;border-bottom:1px solid #E2E6EF;margin:0;padding:3px;color:#777777;font-size:9px;}
+#mine_ideas td {border-bottom:1px solid #E2E6EF;margin:0;padding:3px;color:#555555;font-size:11px;}
+#mine_ideas .even_colomn {background:#F8F8F8 none repeat scroll 0 0;}
+#mine_ideas tr { background-color:#FFFFFF; }
+#mine_ideas tr.odd { background-color:#F0F0FF; }
+#mine_ideas td { padding:3px 3px 3px 9px; }
+#mine_ideas .subheader { color:gray; font-size:9px; }
+#mine_ideas h4 { font-weight:bold;margin:0;font-size:11px; }
+
+#submenu {background:#F7F7F7 none repeat scroll 0 0; border:1px solid #BDC7D8; padding:5px; font-size:11px;}
+#submenu h3 { margin-bottom:10px; padding:5px 0 0 5px; font-size:13px; }
+#submenu ul { color:#3B5998; padding:0 10px 5px; }
+#submenu li {float: left; margin-right: 5px; font-weight:bold; list-style-image:none; list-style-position:inside; list-style-type:square; padding:0 0 5px; }
+#submenu .descrip { color:#444444; font-weight:normal; padding:3px 0 0 15px; }
+
+/* Rating styles */
+#mine_ideas .rating{
+	width:100px;
+	height:16px;
+	margin:0 0 0px 0;
+	padding:0;
+	list-style:none;
+	clear:both;
+	position:relative;
+	background: url(http://fb.t.nerd.ro/fb.t.nerd.ro/views/images/star-matrix.gif) no-repeat 0 0;
+}
+/* add these classes to the ul to effect the change to the correct number of stars */
+#mine_ideas .nostar {background-position:0 0}
+#mine_ideas .onestar {background-position:0 -16px}
+#mine_ideas .twostar {background-position:0 -32px}
+#mine_ideas .threestar {background-position:0 -48px}
+#mine_ideas .fourstar {background-position:0 -64px}
+#mine_ideas .fivestar {background-position:0 -80px}
+#mine_ideas ul.rating li {
+	cursor: pointer;
+ /*ie5 mac doesn't like it if the list is floated\*/
+	float:left;
+	/* end hide*/
+	text-indent:-999em;
+}
+#mine_ideas ul.rating li a {
+	position:absolute;
+	left:0;
+	top:0;
+	width:16px;
+	height:16px;
+	text-decoration:none;
+	z-index: 200;
+}
+#mine_ideas ul.rating li.one a {left:0}
+#mine_ideas ul.rating li.two a {left:16px;}
+#mine_ideas ul.rating li.three a {left:32px;}
+#mine_ideas ul.rating li.four a {left:48px;}
+#mine_ideas ul.rating li.five a {left:64px;}
+#mine_ideas ul.rating li a:hover {
+	z-index:2;
+	width:80px;
+	height:16px;
+	overflow:hidden;
+	left:0;	
+	background: url(http://fb.t.nerd.ro/fb.t.nerd.ro/views/images/star-matrix.gif) no-repeat 0 0
+}
+#mine_ideas ul.rating li.one a:hover {background-position:0 -96px;}
+#mine_ideas ul.rating li.two a:hover {background-position:0 -112px;}
+#mine_ideas ul.rating li.three a:hover {background-position:0 -128px}
+#mine_ideas ul.rating li.four a:hover {background-position:0 -144px}
+#mine_ideas ul.rating li.five a:hover {background-position:0 -160px}

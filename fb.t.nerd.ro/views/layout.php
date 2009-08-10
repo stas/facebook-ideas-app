@@ -1,8 +1,8 @@
 <fb:if-is-app-user>
-	<link rel="stylesheet" href="http://fb.t.nerd.ro/fb.t.nerd.ro/views/style.css?<?php echo rand(); ?>" type="text/css" media="screen" />
+	<link rel="stylesheet" href="<?php echo "http://".DOMAIN."/".THEME_URL; ?>style.css?<?php echo rand(); ?>" type="text/css" media="screen" />
 	<?php if(!empty($header_files)) { print $header_files; } ?>
 	<fb:dashboard>
-		<fb:create-button href="http://apps.facebook.com/fdbussiness/me/new_idea">Add a new idea!</fb:create-button>
+		<fb:create-button href="<?php echo SITE_URL; ?>me/new_idea">Add a new idea!</fb:create-button>
         </fb:dashboard>
 	<?php
 	    //echo "<p>Hello, <fb:name uid=\"$user_id\" useyou=\"false\" />!</p>";
@@ -64,6 +64,6 @@
 		</div>
 	</div>
 <fb:else>
-	<fb:redirect url="http://www.facebook.com/login.php?v=1.0&api_key=[your_app_key]&next=[your_canvas_page_URL]&canvas="/>
+	<fb:redirect url="http://www.facebook.com/login.php?v=1.0&api_key=<?php echo $this->config['config']['facebook']['api_key']; ?>&next=http://apps.facebook.com/fdbussiness&canvas="/>
 </fb:else>
 </fb:if-is-app-user>

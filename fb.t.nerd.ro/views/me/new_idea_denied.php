@@ -1,3 +1,15 @@
+<?php
+    // This generates our submenu
+    include_once('partial_menu.php');
+    $uri = $this->routes->fetch();
+    $message = $this->views['message'];
+    $links = array(
+            'Add new idea' => 'me/new_idea',
+            'List all' => 'me/all',
+            'Invite your friends' => 'me/invite',
+    );
+    submenu($uri, $message, $links);
+?>
 <fb:error>
     <fb:message>We are sorry, but you are not allowed to participate with ideas.</fb:message>
         Due to your age

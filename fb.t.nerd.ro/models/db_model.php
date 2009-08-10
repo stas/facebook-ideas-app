@@ -61,6 +61,15 @@ class db_model extends base {
 	}
 	
 	/*
+	 * Get the post
+	 */
+	function fetch_by_id($id) {
+		$this->db->from('ideas');
+		$this->db->where('id', $id);
+		return $this->db->get();
+	}
+	
+	/*
 	 * Get all mine posts
 	 */
 	function fetch_mine_posts($id, $value, $offset) {
@@ -80,6 +89,30 @@ class db_model extends base {
 		$this->db->from('ideas');
 		$this->db->where('aid', $id);
 		return $this->db->count();
+	}
+	
+	/*
+	 * Get the rating for the id
+	 */
+	function get_rating_by_id($id) {
+                $this->db->from('ideas');
+                $this->db->where('id =', $id);
+                $this->db->select('rating');
+		$r = $this->db->get();
+		return $r[0]->rating;
+	}
+	
+	/*
+	 * Set the new rating for the id
+	 */
+	function set_rating_by_id($id, $r) {
+		$data = array(
+			'rating' => $r
+		);
+		$where = array(
+			'id' => $id
+		);
+                $this->db->update('ideas', $data, $where);
 	}
 
 
