@@ -40,6 +40,7 @@ class me extends controller {
 	function new_idea() {
 		$this->views['user_id'] = $this->user_id;
 		$this->views['message'] = 'Submit your ideas now.';
+		$this->views['no_wrapper'] = __FUNCTION__;
 		$needed_age = date("Y") - 25; // Calculate required age
 		$user_age = $this->facebook->api_client->users_getInfo($this->user_id, 'birthday');
 		if($user_age[0]['birthday']) {
@@ -129,14 +130,18 @@ class me extends controller {
 		if($start < 1) $start = 1;
 		$this->views['message'] = 'Here are all the ideas you commited.';
 		$this->views['user_id'] = $this->user_id;
-		$view['ideas'] = $this->db->fetch_mine_posts($this->user_id, ($start - 1) * $perpage, $perpage);
-		$howmany = $this->db->count_mine_posts($this->user_id);
-		if(($start) * $perpage >= $howmany)
-			$view['hasposts'] = -1; // at the end
-		elseif($start == 1)
-			$view['hasposts'] = 1; //on start
-		elseif($start <= $howmany)
-			$view['hasposts'] = 0; //during pagination
+		$view['ideas'] = $this->db->fetch_mine_ideas($this->user_id, ($start - 1) * $perpage, $perpage);
+		$howmany = $this->db->count_mine_ideas($this->user_id);
+		if($howmany >= $perpage) {
+		    if(($start * $perpage) >= $howmany)
+			    $view['hasposts'] = -1; // at the end
+		    elseif($start == 1)
+			    $view['hasposts'] = 1; //on start
+		    elseif($start <= $howmany)
+			    $view['hasposts'] = 0; //during pagination
+		}
+		else
+		    unset($view['hasposts']); // no pagination
 		$view['page'] = $start;
 		$this->views['content'] = $this->view('me/all', $view);
 	}

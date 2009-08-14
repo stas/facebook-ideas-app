@@ -10,6 +10,7 @@
     );
     submenu($uri, $message, $links);
 ?>
+<br />
 <fb:error>
     <fb:message>We are sorry, but you are not allowed to participate with ideas.</fb:message>
         Due to your age
@@ -21,6 +22,7 @@
         ?>
         profile).
 </fb:error>
+<br />
 <fb:explanation> 
     <fb:message>Please don't leave us!</fb:message> 
         You are still allowed to participate in the following:
@@ -30,7 +32,7 @@
             <li>Rate participants ideas</li>
         </ul>
 </fb:explanation>
-
+<br />
 <fb:success>
     <fb:message>Invite your friends!</fb:message>
     <?php

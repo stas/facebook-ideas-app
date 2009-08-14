@@ -1,14 +1,16 @@
-#main { margin: 10px 0;}
-#mine_ideas {margin-left:0px;margin-top:15px;width:100%;text-align:center;}
-#mine_ideas th.name_heading {color:#333333;font-size:11px;font-weight:bold;}
-#mine_ideas th {border-color:#C7CFE0;border-bottom:1px solid #E2E6EF;margin:0;padding:3px;color:#777777;font-size:9px;}
-#mine_ideas td {border-bottom:1px solid #E2E6EF;margin:0;padding:3px;color:#555555;font-size:11px;}
-#mine_ideas .even_colomn {background:#F8F8F8 none repeat scroll 0 0;}
-#mine_ideas tr { background-color:#FFFFFF; }
-#mine_ideas tr.odd { background-color:#F0F0FF; }
-#mine_ideas td { padding:3px 3px 3px 9px; }
-#mine_ideas .subheader { color:gray; font-size:9px; }
-#mine_ideas h4 { font-weight:bold;margin:0;font-size:11px; }
+#main .wrapper { margin: 10px 0;}
+#main .wrapper table {margin-left:0px;margin-top:15px;width:100%;text-align:center;}
+#main .wrapper table th.name_heading {color:#333333;font-size:11px;font-weight:bold;}
+#main .wrapper table th {border-color:#C7CFE0;border-bottom:1px solid #E2E6EF;margin:0;padding:3px;color:#777777;font-size:9px;}
+#main .wrapper table td {border-bottom:1px solid #E2E6EF;margin:0;padding:3px;color:#555555;font-size:11px;}
+#main .wrapper table .even_colomn {background:#F8F8F8 none repeat scroll 0 0;}
+#main .wrapper table tr { background-color:#FFFFFF; }
+#main .wrapper table tr.odd { background-color:#F0F0FF; }
+#main .wrapper table td { padding:3px 3px 3px 9px; }
+#main .wrapper table .subheader { color:gray; font-size:9px; }
+#main .wrapper table h4 { font-weight:bold;margin:0;font-size:11px; }
+#main .wrapper table th.bottom { text-align: left; }
+#main .wrapper table th.first { width: 500px; }
 
 #submenu {background:#F7F7F7 none repeat scroll 0 0; border:1px solid #BDC7D8; padding:5px; font-size:11px;}
 #submenu h3 { margin-bottom:10px; padding:5px 0 0 5px; font-size:13px; }
@@ -17,54 +19,23 @@
 #submenu .descrip { color:#444444; font-weight:normal; padding:3px 0 0 15px; }
 
 /* Rating styles */
-#mine_ideas .rating{
-	width:100px;
-	height:16px;
-	margin:0 0 0px 0;
-	padding:0;
-	list-style:none;
-	clear:both;
-	position:relative;
-	background: url(http://fb.t.nerd.ro/fb.t.nerd.ro/views/images/star-matrix.gif) no-repeat 0 0;
-}
-/* add these classes to the ul to effect the change to the correct number of stars */
-#mine_ideas .nostar {background-position:0 0}
-#mine_ideas .onestar {background-position:0 -16px}
-#mine_ideas .twostar {background-position:0 -32px}
-#mine_ideas .threestar {background-position:0 -48px}
-#mine_ideas .fourstar {background-position:0 -64px}
-#mine_ideas .fivestar {background-position:0 -80px}
-#mine_ideas ul.rating li {
-	cursor: pointer;
- /*ie5 mac doesn't like it if the list is floated\*/
-	float:left;
-	/* end hide*/
-	text-indent:-999em;
-}
-#mine_ideas ul.rating li a {
-	position:absolute;
-	left:0;
-	top:0;
-	width:16px;
-	height:16px;
-	text-decoration:none;
-	z-index: 200;
-}
-#mine_ideas ul.rating li.one a {left:0}
-#mine_ideas ul.rating li.two a {left:16px;}
-#mine_ideas ul.rating li.three a {left:32px;}
-#mine_ideas ul.rating li.four a {left:48px;}
-#mine_ideas ul.rating li.five a {left:64px;}
-#mine_ideas ul.rating li a:hover {
-	z-index:2;
-	width:80px;
-	height:16px;
-	overflow:hidden;
-	left:0;	
-	background: url(http://fb.t.nerd.ro/fb.t.nerd.ro/views/images/star-matrix.gif) no-repeat 0 0
-}
-#mine_ideas ul.rating li.one a:hover {background-position:0 -96px;}
-#mine_ideas ul.rating li.two a:hover {background-position:0 -112px;}
-#mine_ideas ul.rating li.three a:hover {background-position:0 -128px}
-#mine_ideas ul.rating li.four a:hover {background-position:0 -144px}
-#mine_ideas ul.rating li.five a:hover {background-position:0 -160px}
+#main .wrapper table .rating{ width:100px; height:16px; margin:0 0 0px 0; padding:0; list-style:none; clear:both; position:relative; background: url(http://fb.t.nerd.ro/fb.t.nerd.ro/views/images/star-matrix.gif) no-repeat 0 0; }
+#main .wrapper table .nostar {background-position:0 0}
+#main .wrapper table .onestar {background-position:0 -16px}
+#main .wrapper table .twostar {background-position:0 -32px}
+#main .wrapper table .threestar {background-position:0 -48px}
+#main .wrapper table .fourstar {background-position:0 -64px}
+#main .wrapper table .fivestar {background-position:0 -80px}
+#main .wrapper table ul.rating li { cursor: pointer; float:left; text-indent:-999em; }
+#main .wrapper table ul.rating li a { position:absolute; left:0; top:0; width:16px; height:16px; text-decoration:none; z-index: 200; }
+#main .wrapper table ul.rating li.one a {left:0}
+#main .wrapper table ul.rating li.two a {left:16px;}
+#main .wrapper table ul.rating li.three a {left:32px;}
+#main .wrapper table ul.rating li.four a {left:48px;}
+#main .wrapper table ul.rating li.five a {left:64px;}
+#main .wrapper table ul.rating li a:hover {z-index:2; width:80px; height:16px; overflow:hidden; left:0; background: url(http://fb.t.nerd.ro/fb.t.nerd.ro/views/images/star-matrix.gif) no-repeat 0 0;}
+#main .wrapper table ul.rating li.one a:hover {background-position:0 -96px;}
+#main .wrapper table ul.rating li.two a:hover {background-position:0 -112px;}
+#main .wrapper table ul.rating li.three a:hover {background-position:0 -128px}
+#main .wrapper table ul.rating li.four a:hover {background-position:0 -144px}
+#main .wrapper table ul.rating li.five a:hover {background-position:0 -160px}

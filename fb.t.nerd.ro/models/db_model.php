@@ -1,8 +1,8 @@
 <?php
 /**
- * Posts Model
+ * Ideas Model
  *
- * Provides example DB functionality for the Posts controller
+ * Provides example DB functionality for the Ideas controller
  *
  * @package		MicroMVC
  * @author		David Pennington
@@ -22,7 +22,7 @@ class db_model extends base {
 
 		//Create query
 		$sql = "SELECT count(*) FROM information_schema.tables
-				WHERE table_schema = '". $dbname. "' AND table_name = 'posts'";
+				WHERE table_schema = '". $dbname. "' AND table_name = 'ideas'";
 
 		//Send query
 		$result = $this->db->query($sql);
@@ -34,7 +34,7 @@ class db_model extends base {
 	}
 
 
-	// Create the posts table
+	// Create the ideas table
 	function create_table() {
 		$sql = 'CREATE TABLE IF NOT EXISTS `ideas` (
 			`id` int(11) NOT NULL auto_increment,
@@ -54,14 +54,14 @@ class db_model extends base {
 	}
 
 	/*
-	 * Get all the posts
+	 * Get all the ideas
 	 */
 	function fetch() {
 		return $this->db->get('ideas');
 	}
 	
 	/*
-	 * Get the post
+	 * Get the idea
 	 */
 	function fetch_by_id($id) {
 		$this->db->from('ideas');
@@ -70,11 +70,12 @@ class db_model extends base {
 	}
 	
 	/*
-	 * Get all mine posts
+	 * Get all mine ideas
 	 */
-	function fetch_mine_posts($id, $value, $offset) {
+	function fetch_mine_ideas($id, $value, $offset) {
 		$this->db->from('ideas');
 		$this->db->where('aid', $id);
+		$this->db->order_by('id', 'DESC');
 		if($value)
 			$this->db->limit($offset, $value);
 		else
@@ -83,14 +84,102 @@ class db_model extends base {
 	}
 	
 	/*
-	 * Count all mine posts
+	 * Get all friends ideas
 	 */
-	function count_mine_posts($id) {
+	function fetch_friends_ideas($friends, $value, $offset) {
+		$this->db->from('ideas');
+		$this->db->where('aid', $friends);
+		if($value)
+			$this->db->limit($offset, $value);
+		else
+			$this->db->limit($offset);
+		return $this->db->get();
+	}
+	
+	/*
+	 * Count all friends ideas
+	 */
+	function count_friends_ideas($friends) {
+		$this->db->from('ideas');
+		$this->db->where('aid', $friends);
+		return $this->db->count();
+	}
+	
+	/*
+	 * Count all mine ideas
+	 */
+	function count_mine_ideas($id) {
 		$this->db->from('ideas');
 		$this->db->where('aid', $id);
 		return $this->db->count();
 	}
+
+	/*
+	 * Get top ideas
+	 */
+	function fetch_top_ideas($friends, $value, $offset) {
+		$this->db->from('ideas');
+		$this->db->where('aid', $friends);
+		$this->db->order_by('rating', 'DESC');
+		if($value)
+			$this->db->limit($offset, $value);
+		else
+			$this->db->limit($offset);
+		return $this->db->get();
+	}
 	
+	/*
+	 * Count top ideas
+	 */
+	function count_top_ideas($friends) {
+		$this->db->from('ideas');
+		$this->db->where('aid', $friends);
+		$this->db->order_by('rating', 'DESC');
+		return $this->db->count();
+	}
+
+	/*
+	 * Get newest ideas
+	 */
+	function fetch_newest_ideas($value, $offset) {
+		$this->db->from('ideas');
+		$this->db->order_by('id', 'DESC');
+		if($value)
+			$this->db->limit($offset, $value);
+		else
+			$this->db->limit($offset);
+		return $this->db->get();
+	}
+	
+	/*
+	 * Count newest ideas
+	 */
+	function count_newest_ideas() {
+		$this->db->from('ideas');
+		$this->db->order_by('id', 'DESC');
+		return $this->db->count();
+	}
+	
+	/*
+	 * Get all ideas
+	 */
+	function fetch_all_ideas($value, $offset) {
+		$this->db->from('ideas');
+		if($value)
+			$this->db->limit($offset, $value);
+		else
+			$this->db->limit($offset);
+		return $this->db->get();
+	}
+	
+	/*
+	 * Count all ideas
+	 */
+	function count_all_ideas() {
+		$this->db->from('ideas');
+		return $this->db->count();
+	}
+
 	/*
 	 * Get the rating for the id
 	 */

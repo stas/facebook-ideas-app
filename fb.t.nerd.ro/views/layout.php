@@ -19,9 +19,9 @@
 				$links = array(
 					'Homepage' => 'home',
 					'My Ideas' => 'me',
-					'Friends Ideas' => 'friends',
-					'Top Ideas' => 'ideas/top_ideas',
-					'New Ideas' => 'ideas/new_ideas',
+					'Friends Ideas' => 'ideas/friends',
+					'Top Ideas' => 'ideas/top',
+					'New Ideas' => 'ideas/newest',
 					'All' => 'ideas/all',
 				);
 	
@@ -46,9 +46,13 @@
 				echo "</fb:header-title>";
 			echo "</fb:mediaheader>";
 		*/
+			if(isset($no_wrapper))
+				$class = 'no_wrapper';
+			else
+				$class = 'wrapper';
 			print "
 				<div id=\"main\">
-					<div class=\"wrapper\">
+					<div class=\"$class\">
 						$content
 					</div>
 				</div>

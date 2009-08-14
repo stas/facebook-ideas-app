@@ -25,16 +25,89 @@
             
         }
 
-        function all() {
-            
+        function all($start = 0) {
+            $perpage = 20;
+            if($start < 1) $start = 1;
+            $this->views['message'] = 'The top rated ideas.';
+            $this->views['user_id'] = $this->user_id;
+            $view['ideas'] = $this->db->fetch_all_ideas(($start - 1) * $perpage, $perpage);
+            $howmany = $this->db->count_all_ideas();
+            if($howmany >= $perpage) {
+                if(($start * $perpage) >= $howmany)
+                        $view['hasposts'] = -1; // at the end
+                elseif($start == 1)
+                        $view['hasposts'] = 1; //on start
+                elseif($start <= $howmany)
+                        $view['hasposts'] = 0; //during pagination
+            }
+            else
+                unset($view['hasposts']); // no pagination
+            $view['page'] = $start;
+            $this->views['content'] = $this->view('ideas/all', $view);
         }
 
-        function top_ideas() {
-            
+        function top($start = 0) {
+            $perpage = 20;
+            if($start < 1) $start = 1;
+            $this->views['message'] = 'The top rated ideas.';
+            $this->views['user_id'] = $this->user_id;
+            $view['ideas'] = $this->db->fetch_top_ideas($this->user_id, ($start - 1) * $perpage, $perpage);
+            $howmany = $this->db->count_top_ideas($this->user_id);
+            if($howmany >= $perpage) {
+                if(($start * $perpage) >= $howmany)
+                        $view['hasposts'] = -1; // at the end
+                elseif($start == 1)
+                        $view['hasposts'] = 1; //on start
+                elseif($start <= $howmany)
+                        $view['hasposts'] = 0; //during pagination
+            }
+            else
+                unset($view['hasposts']); // no pagination
+            $view['page'] = $start;
+            $this->views['content'] = $this->view('ideas/top', $view);
         }
 
-        function new_ideas() {
+        function friends($start = 0) {
+            $perpage = 20;
+            if($start < 1) $start = 1;
+            $this->views['message'] = 'Ideas of your friends.';
+            $this->views['user_id'] = $this->user_id;
             
+            $view['ideas'] = $this->db->fetch_friends_ideas($this->facebook->api_client->friends_list, ($start - 1) * $perpage, $perpage);
+            $howmany = $this->db->count_friends_ideas($this->facebook->api_client->friends_list);
+            if($howmany >= $perpage) {
+                if(($start * $perpage) >= $howmany)
+                        $view['hasposts'] = -1; // at the end
+                elseif($start == 1)
+                        $view['hasposts'] = 1; //on start
+                elseif($start <= $howmany)
+                        $view['hasposts'] = 0; //during pagination
+            }
+            else
+                unset($view['hasposts']); // no pagination
+            $view['page'] = $start;
+            $this->views['content'] = $this->view('ideas/friends', $view);
+        }
+
+        function newest($start = 0) {
+            $perpage = 20;
+            if($start < 1) $start = 1;
+            $this->views['message'] = 'The top rated ideas.';
+            $this->views['user_id'] = $this->user_id;
+            $view['ideas'] = $this->db->fetch_newest_ideas(($start - 1) * $perpage, $perpage);
+            $howmany = $this->db->count_newest_ideas();
+            if($howmany >= $perpage) {
+                if(($start * $perpage) >= $howmany)
+                        $view['hasposts'] = -1; // at the end
+                elseif($start == 1)
+                        $view['hasposts'] = 1; //on start
+                elseif($start <= $howmany)
+                        $view['hasposts'] = 0; //during pagination
+            }
+            else
+                unset($view['hasposts']); // no pagination
+            $view['page'] = $start;
+            $this->views['content'] = $this->view('ideas/newest', $view);
         }
         
         function see($id) {

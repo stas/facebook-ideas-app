@@ -1,15 +1,4 @@
 <?php
-    // This generates our submenu
-    include_once('partial_menu.php');
-    $uri = $this->routes->fetch();
-    $message = $this->views['message'];
-    $links = array(
-            'Add new idea' => 'me/new_idea',
-            'List all' => 'me/all',
-            'Invite your friends' => 'me/invite',
-    );
-    submenu($uri, $message, $links);
-    
     /*
      * Generates markup for ratings
      */
@@ -46,7 +35,7 @@
     }
 ?>
 <div>
-    <table id="mine_ideas">
+    <table id="friends_ideas">
             <tr>
                 <th class="first">Title for the idea</th>
                 <th>Idea's rating</th>
@@ -63,7 +52,6 @@
                     echo "<td><h4>$idea->title</h4></td>";
                     echo "<td>".rating($idea->rating, $idea->id)."</td>";
                     echo "<td>Read&rarr;</td>";
-                    echo "<td>Delete</td>";
                     echo "</tr>";
                     $odd++;
                 }
@@ -74,18 +62,17 @@
                 <?php
                     if($hasposts < 0) : // at the end
                 ?>
-                <a href="<?php echo SITE_URL; ?>me/all/<?php echo $page - 1; ?>">&larr; Go back</a> | Page <?php echo $page; ?></a>
+                <a href="<?php echo SITE_URL; ?>ideas/friends/<?php echo $page - 1; ?>">&larr; Go back</a> | Page <?php echo $page; ?></a>
                 <?php
                     elseif($hasposts == 0) : //during pagination
                 ?>
-                <a href="<?php echo SITE_URL; ?>me/all/<?php echo $page - 1; ?>">&larr; Go back</a> | Page <?php echo $page; ?> | <a href="<?php echo SITE_URL; ?>me/all/<?php echo $page + 1; ?>">Next page &rarr</a>
+                <a href="<?php echo SITE_URL; ?>ideas/friends/<?php echo $page - 1; ?>">&larr; Go back</a> | Page <?php echo $page; ?> | <a href="<?php echo SITE_URL; ?>ideas/friends/<?php echo $page + 1; ?>">Next page &rarr</a>
                    <?php
                     elseif($hasposts > 0) : //on start
                 ?>
-                Page <?php echo $page; ?> | <a href="<?php echo SITE_URL; ?>me/all/<?php echo $page + 1; ?>">Next page &rarr</a>
+                Page <?php echo $page; ?> | <a href="<?php echo SITE_URL; ?>ideas/friends/<?php echo $page + 1; ?>">Next page &rarr</a>
                 </th>
                 <?php endif; ?>
-                <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
