@@ -56,6 +56,12 @@
 						$content
 					</div>
 				</div>
+				<div class=\"arrowlistmenu\">
+				        <fb:if-section-not-added section=\"profile\">
+				                <h3 class=\"headerbar\">Profile Box</h3>
+				                <fb:add-section-button section=\"profile\" />
+				        </fb:if-section-not-added>
+				</div>
 				";
 		?>
 		

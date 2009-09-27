@@ -1,3 +1,6 @@
+<div id="thenavigation" >
+    My ideas
+</div>
 <?php
     // This generates our submenu
     include_once('partial_menu.php');
@@ -13,8 +16,10 @@
     /*
      * Generates markup for ratings
      */
-    function rating($r, $id) {
-        $r = intval($r);
+    function rating($r, $v, $id) {
+        if($v == 0)
+            $v = 1; //get rid of divisions by zero
+        $r = $r / $v; //calculate rating
         switch($r) {
             case ($r < 1):
                 $class = "nostar"; break;
@@ -50,8 +55,6 @@
             <tr>
                 <th class="first">Title for the idea</th>
                 <th>Idea's rating</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
             </tr>
             <?php
                 $odd = 0;
@@ -60,10 +63,8 @@
                         echo "<tr class=\"odd\">";
                     else
                         echo "<tr>";
-                    echo "<td><h4>$idea->title</h4></td>";
-                    echo "<td>".rating($idea->rating, $idea->id)."</td>";
-                    echo "<td>Read&rarr;</td>";
-                    echo "<td>Delete</td>";
+                    echo '<td><h4><a href="/'.$this->app_url .'/ideas/see/'. $idea->id .'">'. $idea->title.'</a></h4></td>';
+                    echo "<td>".rating($idea->rating, $idea->votes, $idea->id)."</td>";
                     echo "</tr>";
                     $odd++;
                 }

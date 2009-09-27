@@ -18,4 +18,5 @@
                     ?>
             </ul>
     </div>
+    <div class="clear">&nbsp;</div>
 <?php } ?>

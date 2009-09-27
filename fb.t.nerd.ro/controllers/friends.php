@@ -15,8 +15,8 @@
 		$this->model('facebook', $this->config['config']['facebook'], 'facebook', 'facebook');
 		$this->user_id = $this->facebook->require_login();
 		
-		$this->app_name = "Responsible Business";
-		$this->app_url = "fdbussiness";
+		$this->app_name = "Ideas App";
+		$this->app_url = "ideasapp";
 		
 		//Check to see if the table is installed
 		//$this->db->check_install();

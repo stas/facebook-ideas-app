@@ -41,10 +41,11 @@ class db_model extends base {
 			`title` varchar(150) collate utf8_bin NOT NULL,
 			`message` varchar(2000) collate utf8_bin NOT NULL,
 			`aid` bigint(20) NOT NULL,
-			`rating` float default 0,
+			`rating` tinyint(4) NOT NULL default \'0\',
+			`votes` tinyint(4) NOT NULL default \'0\',
+			`ratio` float NOT NULL default \'0\',
 			PRIMARY KEY  (`id`)
-		      ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;';
-
+		      ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;';
 		//Create the table
 		$this->db->exec($sql);
 	}
@@ -70,12 +71,34 @@ class db_model extends base {
 	}
 	
 	/*
+	 * Delete the idea
+	 */
+	function delete_by_id($id) {
+		$this->db->where('id', $id);
+		return $this->db->delete('ideas');
+	}
+	
+	/*
 	 * Get all mine ideas
 	 */
 	function fetch_mine_ideas($id, $value, $offset) {
 		$this->db->from('ideas');
 		$this->db->where('aid', $id);
 		$this->db->order_by('id', 'DESC');
+		if($value)
+			$this->db->limit($offset, $value);
+		else
+			$this->db->limit($offset);
+		return $this->db->get();
+	}
+	
+	/*
+	 * Get all mine ideas
+	 */
+	function fetch_mine_top_ideas($id, $value = 5, $offset = 5) {
+		$this->db->from('ideas');
+		$this->db->where('aid', $id);
+		$this->db->order_by('ratio', 'DESC');
 		if($value)
 			$this->db->limit($offset, $value);
 		else
@@ -117,10 +140,9 @@ class db_model extends base {
 	/*
 	 * Get top ideas
 	 */
-	function fetch_top_ideas($friends, $value, $offset) {
+	function fetch_top_ideas($value, $offset) {
 		$this->db->from('ideas');
-		$this->db->where('aid', $friends);
-		$this->db->order_by('rating', 'DESC');
+		$this->db->order_by('ratio', 'DESC');
 		if($value)
 			$this->db->limit($offset, $value);
 		else
@@ -131,10 +153,9 @@ class db_model extends base {
 	/*
 	 * Count top ideas
 	 */
-	function count_top_ideas($friends) {
+	function count_top_ideas() {
 		$this->db->from('ideas');
-		$this->db->where('aid', $friends);
-		$this->db->order_by('rating', 'DESC');
+		$this->db->order_by('ratio', 'DESC');
 		return $this->db->count();
 	}
 
@@ -186,24 +207,29 @@ class db_model extends base {
 	function get_rating_by_id($id) {
                 $this->db->from('ideas');
                 $this->db->where('id =', $id);
-                $this->db->select('rating');
+                $this->db->select('aid, rating, votes');
 		$r = $this->db->get();
-		return $r[0]->rating;
+		return array($r[0]->rating, $r[0]->votes, $r[0]->aid);
 	}
 	
 	/*
 	 * Set the new rating for the id
 	 */
-	function set_rating_by_id($id, $r) {
+	function set_rating_by_id($id, $r, $v) {
+		$ratio = 0;
+		if($r > 0 && $v > 0)
+			$ratio = $r/$v;
+			
 		$data = array(
-			'rating' => $r
+			'rating' => $r,
+			'votes' => $v,
+			'ratio' => $ratio
 		);
 		$where = array(
 			'id' => $id
 		);
                 $this->db->update('ideas', $data, $where);
 	}
-
 
 }
 

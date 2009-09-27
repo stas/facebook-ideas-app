@@ -15,8 +15,8 @@ class me extends controller {
 		$this->model('facebook', $this->config['config']['facebook'], 'facebook', 'facebook');
 		$this->user_id = $this->facebook->require_login();
 		
-		$this->app_name = "Responsible Business";
-		$this->app_url = "fdbussiness";
+		$this->app_name = "Ideas App";
+		$this->app_url = "ideasapp";
 		
 		//Check to see if the table is installed
 		//$this->db->check_install();
@@ -50,7 +50,7 @@ class me extends controller {
 			$user_age = $needed_age = date("Y");
 		}
 		
-		if ($user_age < $needed_age)
+		if ($user_age < $needed_age) // Age missed
 			$this->views['content'] = $this->view('me/new_idea_denied');
 		else
 			$this->views['content'] = $this->view('me/new_idea');
@@ -76,6 +76,19 @@ class me extends controller {
 				'aid' => $this->user_id
 			);
 			$this->db->insert_idea($data);
+			
+			// Create a stream
+			if(in_array('publish_stream',explode(',',$this->facebook->fb_params['ext_perms']))) {
+				$message = "I published a new idea: ".post('title')."!";
+				/*
+				$action_links = array(
+						      array(
+							'text' => '<fb:publisher-link>Check out Ideas App </fb:publisher-link>',
+							'href' => 'http://apps.facebook.com/'.$this->app_url.'/ideas/newest'
+						));
+				*/
+				$this->facebook->api_client->stream_publish($message/*, null, $action_links*/);
+			}
 		}
 
 		$this->views['content'] = $this->view('me/idea_added');
@@ -87,7 +100,7 @@ class me extends controller {
 		$this->views['message'] = 'Invite some friends to support your ideas.';
 		$app_name = $this->app_name;
 		$app_url = $this->app_url;
-		$invite_href = "me/index";
+		$invite_href = "me/all";
 		
 		$views = array();
 		$view = null;
@@ -111,10 +124,18 @@ class me extends controller {
 			// Convert the array of friends into a comma-delimeted string.
 			$friends = implode(',', $friends);
 			// Prepare the invitation text that all invited users will receive.
-			$views['content'] = "<fb:name uid=\"".$this->user_id."\" firstnameonly=\"true\" shownetwork=\"false\"/> has started using
-					<a href=\"http://apps.facebook.com/".$app_url."/\">".$app_name."</a>
-					and thought you'll like it too!\n".
-					"<fb:req-choice url=\"".$this->facebook->get_add_url()."\" label=\"Put ".$app_name." on your profile\"/>"; 
+			$views['content'] = "Hi,
+				\n
+				I've come up with an amazing idea for the <a href=\"http://apps.facebook.com/".$app_url."/\">".$app_name."</a>.
+				\n
+				I've just posted my idea on the Challenge  website and I would really like you to take a look at it and post your comments on the site. All you have to do is install the application and go to \"My friends' ideas\". The more comments or votes I can get for my idea, the more chances I have to win the Mini Notebook!
+				\n
+				You can enter the Challenge by posting your own idea too! If you decide to submit your own idea, please let me know and I'll post my comments on yours as well. 
+				\n
+				Thanks!
+				\n
+				<fb:name uid=\"".$this->user_id."\" firstnameonly=\"true\" shownetwork=\"false\"/>".
+				"<fb:req-choice url=\"".$this->facebook->get_add_url()."\" label=\"Put ".$app_name." on your profile\"/>"; 
 			$views['app_name'] = $app_name;
 			$views['app_url'] = $app_url;
 			$views['invite_href'] = $invite_href;
@@ -128,7 +149,7 @@ class me extends controller {
 	function all($start = 0) {
 		$perpage = 20;
 		if($start < 1) $start = 1;
-		$this->views['message'] = 'Here are all the ideas you commited.';
+		$this->views['message'] = 'Here are all the ideas you submitted.';
 		$this->views['user_id'] = $this->user_id;
 		$view['ideas'] = $this->db->fetch_mine_ideas($this->user_id, ($start - 1) * $perpage, $perpage);
 		$howmany = $this->db->count_mine_ideas($this->user_id);

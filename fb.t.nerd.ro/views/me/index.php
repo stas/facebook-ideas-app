@@ -9,4 +9,6 @@
             'Invite your friends' => 'me/invite',
     );
     submenu($uri, $message, $links);
+    
 ?>
+<div class="clear">&nbsp;</div>
