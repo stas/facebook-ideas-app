@@ -1,0 +1,13 @@
+<?php
+
+/* PDO MySQL Database Config */
+$database = array(
+	'type'	=> 'mysql',
+	'dns'	=> 'host=fb.t.nerd.ro;dbname=fbapp',
+	'port'	=> '3306',
+	'name'	=> '',
+	'user'	=> 'fbapp',
+	'pass'	=> 'sup3r_fbapp_pass',
+	'options'	=> null,//PDO::ATTR_PERSISTENT, PDO::ATTR_STATEMENT_CLASS, etc
+);
+
